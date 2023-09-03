@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { init_bar_array } from '$lib/array.ts';
 	const generateNewArray = (e: Event) => {
 		e.preventDefault();
 		console.log('Generating new array');
-		// TODO: Generate new array in Svelte store
+		const n_bars = Math.floor(window.innerWidth / 15);
+		init_bar_array(window, n_bars);
 	};
 </script>
 
