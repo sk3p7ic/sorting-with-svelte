@@ -2,9 +2,20 @@
 	import MenuBar from '../components/MenuBar.svelte';
 </script>
 
-<MenuBar />
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<main>
+	<MenuBar />
+	<div id="output" />
+</main>
 
 <style>
+	main {
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
+	}
+
+	div#output {
+		width: 100%;
+		height: 100%;
+	}
 </style>
