@@ -26,3 +26,5 @@ export const display_config = writable<DisplayConfig>({
 	min_height: 10,
 	bar_color: BarColor.CYAN
 });
+
+export const is_sorting = writable<boolean>(false);

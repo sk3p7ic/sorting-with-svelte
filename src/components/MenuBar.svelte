@@ -1,27 +1,32 @@
 <script lang="ts">
 	import SettingsModal from './SettingsModal.svelte';
 	import { get } from 'svelte/store';
-	import { BarColor, bar_array, display_config } from '$lib/stores';
+	import { BarColor, bar_array, display_config, is_sorting } from '$lib/stores';
 	import { init_bar_array } from '$lib/array';
 	import bubble_sort from '$lib/algos/bubble';
+
 	let bar_color: BarColor;
 	display_config.subscribe((v) => {
 		bar_color = v.bar_color;
 	});
+
 	const generateNewArray = () => {
 		console.log('Generating new array');
 		const n_bars = Math.floor(window.innerWidth / 15);
 		init_bar_array(window, n_bars, bar_color);
 	};
+
 	let selectedAlgorithm = 'bubble-sort';
-	const runAlgorithm = (e: Event) => {
+	const runAlgorithm = async (e: Event) => {
 		e.preventDefault();
+		is_sorting.set(true);
 		if (get(bar_array).length === 0) {
 			generateNewArray();
 		}
 		switch (selectedAlgorithm) {
 			case 'bubble-sort':
-				bubble_sort();
+				await bubble_sort();
+				is_sorting.set(false);
 				break;
 			case 'insertion-sort':
 				break;
@@ -35,6 +40,12 @@
 				break;
 		}
 	};
+
+	let isSorting = false;
+	is_sorting.subscribe((v) => {
+		isSorting = v;
+	});
+
 	let showSettings = false;
 	const toggleSettingsModal = () => {
 		showSettings = !showSettings;
@@ -57,7 +68,7 @@
 			</select>
 			<button on:click={runAlgorithm}>Run</button>
 			<span class="divider" />
-			<button on:click={generateNewArray}>Generate New Array</button>
+			<button on:click={generateNewArray} disabled={isSorting}>Generate New Array</button>
 			<span class="divider" />
 		</form>
 	</div>
@@ -119,6 +130,13 @@
 
 	#bar-form > button:active {
 		background-color: var(--magenta);
+	}
+
+	#bar-form > button:disabled {
+		background-color: var(--black);
+		color: var(--white);
+		cursor: not-allowed;
+		border: 1px solid var(--foreground);
 	}
 
 	#bar-form > select {
