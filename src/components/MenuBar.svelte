@@ -1,10 +1,15 @@
 <script lang="ts">
+	import SettingsModal from './SettingsModal.svelte';
 	import { init_bar_array } from '$lib/array.ts';
 	const generateNewArray = (e: Event) => {
 		e.preventDefault();
 		console.log('Generating new array');
 		const n_bars = Math.floor(window.innerWidth / 15);
 		init_bar_array(window, n_bars);
+	};
+	let showSettings = false;
+	const toggleSettingsModal = () => {
+		showSettings = !showSettings;
 	};
 </script>
 
@@ -27,6 +32,8 @@
 			<span class="divider" />
 		</form>
 	</div>
+	<button on:click={toggleSettingsModal}>Settings</button>
+	<SettingsModal showSettingsDialog={showSettings} callback={toggleSettingsModal} />
 </div>
 
 <style>
@@ -36,6 +43,7 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
+		justify-content: space-between;
 	}
 
 	#title-and-buttons {
@@ -102,6 +110,25 @@
 	#bar-form > select:active > * {
 		background-color: var(--black);
 		color: var(--foreground);
+	}
+
+	button {
+		padding: 0.25rem 1rem;
+		border: none;
+		border-radius: 0.5rem;
+		background-color: var(--black);
+		color: var(--white);
+		font-weight: 600;
+		cursor: pointer;
+		transition-property: color, background-color;
+		transition-timing-function: ease-in-out;
+		transition-duration: 0.2s;
+	}
+
+	button:hover,
+	button:active {
+		background-color: var(--white);
+		color: var(--black);
 	}
 
 	@media (max-width: 768px) {
