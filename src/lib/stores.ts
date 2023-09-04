@@ -2,6 +2,9 @@ import { writable } from 'svelte/store';
 
 export const bar_array = writable<number[]>([]);
 
+/// Stores a list of indices that are currently being evaluated.
+export const currently_evaluating = writable<number[]>([]);
+
 export enum BarColor {
 	RED = 'var(--red)',
 	GREEN = 'var(--green)',
