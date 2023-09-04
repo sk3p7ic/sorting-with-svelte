@@ -1,11 +1,35 @@
 <script lang="ts">
 	import SettingsModal from './SettingsModal.svelte';
+	import { get } from 'svelte/store';
+	import { bar_array } from '$lib/stores.ts';
 	import { init_bar_array } from '$lib/array.ts';
-	const generateNewArray = (e: Event) => {
-		e.preventDefault();
+	import bubble_sort from '$lib/algos/bubble.ts';
+	const generateNewArray = () => {
 		console.log('Generating new array');
 		const n_bars = Math.floor(window.innerWidth / 15);
 		init_bar_array(window, n_bars);
+	};
+	let selectedAlgorithm = 'bubble-sort';
+	const runAlgorithm = (e: Event) => {
+		e.preventDefault();
+		if (get(bar_array).length === 0) {
+			generateNewArray();
+		}
+		switch (selectedAlgorithm) {
+			case 'bubble-sort':
+				bubble_sort();
+				break;
+			case 'insertion-sort':
+				break;
+			case 'selection-sort':
+				break;
+			case 'merge-sort':
+				break;
+			case 'quick-sort':
+				break;
+			case 'heap-sort':
+				break;
+		}
 	};
 	let showSettings = false;
 	const toggleSettingsModal = () => {
@@ -19,7 +43,7 @@
 		<form id="bar-form">
 			<span class="divider" />
 			<label for="sort-algo">Sorting Algorithm</label>
-			<select name="sort-algo">
+			<select name="sort-algo" bind:value={selectedAlgorithm}>
 				<option value="bubble-sort">Bubble Sort</option>
 				<option value="insertion-sort">Insertion Sort</option>
 				<option value="selection-sort">Selection Sort</option>
@@ -27,6 +51,7 @@
 				<option value="quick-sort">Quick Sort</option>
 				<option value="heap-sort">Heap Sort</option>
 			</select>
+			<button on:click={runAlgorithm}>Run</button>
 			<span class="divider" />
 			<button on:click={generateNewArray}>Generate New Array</button>
 			<span class="divider" />
