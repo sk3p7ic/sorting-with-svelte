@@ -5,6 +5,7 @@
 	import { init_bar_array } from '$lib/array';
 	import bubbleSort from '$lib/algos/bubble';
 	import insertionSort from '$lib/algos/insertion';
+	import selectionSort from '$lib/algos/selection';
 
 	let bar_color: BarColor;
 	display_config.subscribe((v) => {
@@ -33,6 +34,8 @@
 				is_sorting.set(false);
 				break;
 			case 'selection-sort':
+				await selectionSort();
+				is_sorting.set(false);
 				break;
 			case 'merge-sort':
 				break;
