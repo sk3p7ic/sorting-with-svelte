@@ -68,7 +68,7 @@ async function merge(l: number, m: number, r: number) {
 	}
 	while (i < n1) {
 		bar_colors.update((value) => {
-			value[l + i] = BarColor.WHITE;
+			value[l + i] = BarColor.RED;
 			return value;
 		});
 		await sleep(25);
@@ -83,7 +83,7 @@ async function merge(l: number, m: number, r: number) {
 	}
 	while (j < n2) {
 		bar_colors.update((value) => {
-			value[m + 1 + j] = BarColor.WHITE;
+			value[m + 1 + j] = BarColor.RED;
 			return value;
 		});
 		await sleep(25);

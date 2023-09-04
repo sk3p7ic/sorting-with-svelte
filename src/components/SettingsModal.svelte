@@ -17,7 +17,6 @@
 	});
 
 	const available_colors = [
-		{ name: 'Red', value: BarColor.RED },
 		{ name: 'Green', value: BarColor.GREEN },
 		{ name: 'Yellow', value: BarColor.YELLOW },
 		{ name: 'Blue', value: BarColor.BLUE },
