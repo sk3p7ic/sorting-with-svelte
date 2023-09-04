@@ -66,7 +66,7 @@
 				<option value="quick-sort">Quick Sort</option>
 				<option value="heap-sort">Heap Sort</option>
 			</select>
-			<button on:click={runAlgorithm}>Run</button>
+			<button on:click={runAlgorithm} disabled={isSorting}>Run</button>
 			<span class="divider" />
 			<button on:click={generateNewArray} disabled={isSorting}>Generate New Array</button>
 			<span class="divider" />

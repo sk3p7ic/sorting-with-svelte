@@ -20,11 +20,13 @@ export const bar_colors = writable<BarColor[]>([]);
 export type DisplayConfig = {
 	min_height: number;
 	bar_color: BarColor;
+	time_scale: number;
 };
 
 export const display_config = writable<DisplayConfig>({
 	min_height: 10,
-	bar_color: BarColor.CYAN
+	bar_color: BarColor.CYAN,
+	time_scale: 1
 });
 
 export const is_sorting = writable<boolean>(false);

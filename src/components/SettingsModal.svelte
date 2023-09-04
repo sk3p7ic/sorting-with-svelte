@@ -6,16 +6,28 @@
 
 	import { BarColor, bar_colors, type DisplayConfig, display_config } from '$lib/stores';
 	let conf: DisplayConfig;
+	let time_scale: number;
 	display_config.subscribe((v) => {
 		conf = v;
+		time_scale = v.time_scale * 100;
 	});
 	let colors: BarColor[];
 	bar_colors.subscribe((v) => {
 		colors = v;
 	});
+
+	const available_colors = [
+		{ name: 'Red', value: BarColor.RED },
+		{ name: 'Green', value: BarColor.GREEN },
+		{ name: 'Yellow', value: BarColor.YELLOW },
+		{ name: 'Blue', value: BarColor.BLUE },
+		{ name: 'Magenta', value: BarColor.MAGENTA },
+		{ name: 'Cyan', value: BarColor.CYAN }
+	];
+
 	const handleSubmit = (e: Event) => {
 		e.preventDefault();
-		display_config.set(conf);
+		display_config.set({ ...conf, time_scale: time_scale / 100 });
 		updateAllColors(conf.bar_color);
 		callback();
 	};
@@ -28,17 +40,26 @@
 			<div>
 				<label for="bar-color">Bar Color</label>
 				<select name="bar-color" bind:value={conf.bar_color}>
-					<option value={BarColor.RED}>Red</option>
-					<option value={BarColor.GREEN}>Green</option>
-					<option value={BarColor.YELLOW}>Yellow</option>
-					<option value={BarColor.BLUE}>Blue</option>
-					<option value={BarColor.MAGENTA}>Magenta</option>
-					<option value={BarColor.CYAN}>Cyan</option>
+					{#each available_colors as color}
+						<option value={color.value}>{color.name}</option>
+					{/each}
 				</select>
 			</div>
 			<div>
 				<label for="minimum-bar-height">Minimum Bar Height</label>
 				<input type="number" name="minimum-bar-height" bind:value={conf.min_height} />
+			</div>
+			<div>
+				<label for="time-scale">Animation Speed Multiplier</label>
+				<input
+					type="range"
+					name="time-scale"
+					min="50"
+					max="100"
+					bind:value={time_scale}
+					class="form-slider"
+				/>
+				<span class="tiny">Value: {(time_scale / 100).toPrecision(2)}</span>
 			</div>
 			<button type="submit">Save</button>
 		</form>
@@ -72,5 +93,45 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
+	}
+
+	.form-slider {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 100%;
+		height: 0.5rem;
+		border-radius: 5px;
+		background: var(--background);
+		outline: none;
+		opacity: 0.7;
+		-webkit-transition: 0.2s;
+		transition: opacity 0.2s;
+	}
+
+	.form-slider:hover {
+		opacity: 1;
+	}
+
+	.form-slider::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 1.25rem;
+		height: 1.25rem;
+		border-radius: 50%;
+		background: var(--white);
+		cursor: pointer;
+	}
+
+	.form-slider::-moz-range-thumb {
+		width: 1.25rem;
+		height: 1.25rem;
+		border-radius: 50%;
+		background: var(--white);
+		cursor: pointer;
+	}
+
+	.tiny {
+		font-size: 0.75rem;
+		text-align: end;
 	}
 </style>
