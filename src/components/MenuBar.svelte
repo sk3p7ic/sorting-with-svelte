@@ -6,6 +6,7 @@
 	import bubbleSort from '$lib/algos/bubble';
 	import insertionSort from '$lib/algos/insertion';
 	import selectionSort from '$lib/algos/selection';
+	import mergeSort from '$lib/algos/merge';
 
 	let bar_color: BarColor;
 	display_config.subscribe((v) => {
@@ -38,6 +39,8 @@
 				is_sorting.set(false);
 				break;
 			case 'merge-sort':
+				await mergeSort();
+				is_sorting.set(false);
 				break;
 			case 'quick-sort':
 				break;
