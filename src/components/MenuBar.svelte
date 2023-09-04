@@ -7,6 +7,7 @@
 	import insertionSort from '$lib/algos/insertion';
 	import selectionSort from '$lib/algos/selection';
 	import mergeSort from '$lib/algos/merge';
+	import quickSort from '$lib/algos/quick';
 
 	let bar_color: BarColor;
 	display_config.subscribe((v) => {
@@ -43,6 +44,8 @@
 				is_sorting.set(false);
 				break;
 			case 'quick-sort':
+				await quickSort();
+				is_sorting.set(false);
 				break;
 			case 'heap-sort':
 				break;
