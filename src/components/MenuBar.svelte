@@ -3,7 +3,7 @@
 	import { get } from 'svelte/store';
 	import { BarColor, bar_array, display_config, is_sorting } from '$lib/stores';
 	import { init_bar_array } from '$lib/array';
-	import bubble_sort from '$lib/algos/bubble';
+	import bubbleSort from '$lib/algos/bubble';
 
 	let bar_color: BarColor;
 	display_config.subscribe((v) => {
@@ -24,7 +24,7 @@
 		}
 		switch (selectedAlgorithm) {
 			case 'bubble-sort':
-				await bubble_sort();
+				await bubbleSort();
 				is_sorting.set(false);
 				break;
 			case 'insertion-sort':
