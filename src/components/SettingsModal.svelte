@@ -39,7 +39,7 @@
 		<form on:submit|preventDefault={handleSubmit}>
 			<div>
 				<label for="bar-color">Bar Color</label>
-				<select name="bar-color" bind:value={conf.bar_color}>
+				<select name="bar-color" id="bar-color" bind:value={conf.bar_color}>
 					{#each available_colors as color}
 						<option value={color.value}>{color.name}</option>
 					{/each}
@@ -47,13 +47,19 @@
 			</div>
 			<div>
 				<label for="minimum-bar-height">Minimum Bar Height</label>
-				<input type="number" name="minimum-bar-height" bind:value={conf.min_height} />
+				<input
+					type="number"
+					name="minimum-bar-height"
+					id="minimum-bar-height"
+					bind:value={conf.min_height}
+				/>
 			</div>
 			<div>
 				<label for="time-scale">Animation Speed Multiplier</label>
 				<input
 					type="range"
 					name="time-scale"
+					id="time-scale"
 					min="50"
 					max="100"
 					bind:value={time_scale}

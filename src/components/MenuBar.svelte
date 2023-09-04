@@ -57,7 +57,7 @@
 		<form id="bar-form" on:submit|preventDefault={generateNewArray}>
 			<span class="divider" />
 			<label for="sort-algo">Sorting Algorithm</label>
-			<select name="sort-algo" bind:value={selectedAlgorithm}>
+			<select name="sort-algo" id="sort-algo" bind:value={selectedAlgorithm}>
 				<option value="bubble-sort">Bubble Sort</option>
 				<option value="insertion-sort">Insertion Sort</option>
 				<option value="selection-sort">Selection Sort</option>
