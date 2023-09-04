@@ -11,7 +11,6 @@
 	});
 
 	const generateNewArray = () => {
-		console.log('Generating new array');
 		const n_bars = Math.floor(window.innerWidth / 15);
 		init_bar_array(window, n_bars, bar_color);
 	};
@@ -55,7 +54,7 @@
 <div id="menu-bar">
 	<div id="title-and-buttons">
 		<h2>Sorting Visualizer</h2>
-		<form id="bar-form">
+		<form id="bar-form" on:submit|preventDefault={generateNewArray}>
 			<span class="divider" />
 			<label for="sort-algo">Sorting Algorithm</label>
 			<select name="sort-algo" bind:value={selectedAlgorithm}>
@@ -68,7 +67,7 @@
 			</select>
 			<button on:click={runAlgorithm} disabled={isSorting}>Run</button>
 			<span class="divider" />
-			<button on:click={generateNewArray} disabled={isSorting}>Generate New Array</button>
+			<button type="submit" disabled={isSorting}>Generate New Array</button>
 			<span class="divider" />
 		</form>
 	</div>
