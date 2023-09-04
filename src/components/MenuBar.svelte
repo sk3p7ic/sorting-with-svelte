@@ -4,6 +4,7 @@
 	import { BarColor, bar_array, display_config, is_sorting } from '$lib/stores';
 	import { init_bar_array } from '$lib/array';
 	import bubbleSort from '$lib/algos/bubble';
+	import insertionSort from '$lib/algos/insertion';
 
 	let bar_color: BarColor;
 	display_config.subscribe((v) => {
@@ -28,6 +29,8 @@
 				is_sorting.set(false);
 				break;
 			case 'insertion-sort':
+				await insertionSort();
+				is_sorting.set(false);
 				break;
 			case 'selection-sort':
 				break;
