@@ -1,15 +1,22 @@
 <script lang="ts">
+	import { updateAllColors } from '$lib/array';
+
 	export let showSettingsDialog = false;
 	export let callback: () => void;
 
-	import { BarColor, type DisplayConfig, display_config } from '$lib/stores.ts';
+	import { BarColor, bar_colors, type DisplayConfig, display_config } from '$lib/stores';
 	let conf: DisplayConfig;
 	display_config.subscribe((v) => {
 		conf = v;
 	});
+	let colors: BarColor[];
+	bar_colors.subscribe((v) => {
+		colors = v;
+	});
 	const handleSubmit = (e: Event) => {
 		e.preventDefault();
 		display_config.set(conf);
+		updateAllColors(conf.bar_color);
 		callback();
 	};
 </script>
@@ -27,7 +34,6 @@
 					<option value={BarColor.BLUE}>Blue</option>
 					<option value={BarColor.MAGENTA}>Magenta</option>
 					<option value={BarColor.CYAN}>Cyan</option>
-					<option value={BarColor.WHITE}>White</option>
 				</select>
 			</div>
 			<div>

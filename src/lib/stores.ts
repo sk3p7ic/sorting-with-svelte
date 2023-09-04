@@ -15,6 +15,8 @@ export enum BarColor {
 	WHITE = 'var(--white)'
 }
 
+export const bar_colors = writable<BarColor[]>([]);
+
 export type DisplayConfig = {
 	min_height: number;
 	bar_color: BarColor;

@@ -1,13 +1,17 @@
 <script lang="ts">
 	import SettingsModal from './SettingsModal.svelte';
 	import { get } from 'svelte/store';
-	import { bar_array } from '$lib/stores.ts';
-	import { init_bar_array } from '$lib/array.ts';
-	import bubble_sort from '$lib/algos/bubble.ts';
+	import { BarColor, bar_array, display_config } from '$lib/stores';
+	import { init_bar_array } from '$lib/array';
+	import bubble_sort from '$lib/algos/bubble';
+	let bar_color: BarColor;
+	display_config.subscribe((v) => {
+		bar_color = v.bar_color;
+	});
 	const generateNewArray = () => {
 		console.log('Generating new array');
 		const n_bars = Math.floor(window.innerWidth / 15);
-		init_bar_array(window, n_bars);
+		init_bar_array(window, n_bars, bar_color);
 	};
 	let selectedAlgorithm = 'bubble-sort';
 	const runAlgorithm = (e: Event) => {

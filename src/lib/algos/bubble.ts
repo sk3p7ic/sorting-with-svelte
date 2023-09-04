@@ -1,18 +1,34 @@
-import { bar_array, currently_evaluating } from '../stores';
-import { swap } from './utils';
+import { BarColor, bar_array, bar_colors, display_config } from '../stores';
+import { sleep, swap } from './utils';
 
 let arr: number[];
 bar_array.subscribe((value) => (arr = value));
 
+let color: BarColor;
+display_config.subscribe((value) => (color = value.bar_color));
+
 export default async function bubble_sort() {
 	for (let i = 0; i < arr.length; i++) {
 		for (let j = 0; j < arr.length - i - 1; j++) {
-          currently_evaluating.set([j, j+1]);
+			bar_colors.update((value) => {
+				value[j] = value[j + 1] = BarColor.WHITE;
+				return value;
+			});
 			if (arr[j] > arr[j + 1]) {
 				await swap(arr, j, j + 1, 25);
 			}
 			bar_array.set(arr);
+			bar_colors.update((value) => {
+				value[j] = value[j + 1] = color;
+				return value;
+			});
 		}
 	}
-    currently_evaluating.set([]);
+	for (let i = 0; i < arr.length; i++) {
+		bar_colors.update((value) => {
+			value[i] = BarColor.WHITE;
+			return value;
+		});
+		await sleep(10);
+	}
 }
