@@ -79,7 +79,7 @@ export const default_algorithm_stats: Map<AvailableAlgorithm, AlgorithmStats> = 
 		{
 			algorithm_name: 'Quick Sort',
 			algorithm_time_complexity: 'O(n log(n))',
-			algorithm_space_complexity: 'O(log(n))'
+			algorithm_space_complexity: 'O(nlog(n))'
 		}
 	],
 	[
@@ -93,9 +93,9 @@ export const default_algorithm_stats: Map<AvailableAlgorithm, AlgorithmStats> = 
 	[
 		AvailableAlgorithm.HEAP_SORT,
 		{
-			algorithm_name: 'Quick Sort',
+			algorithm_name: 'Heap Sort',
 			algorithm_time_complexity: 'O(n log(n))',
-			algorithm_space_complexity: 'O(log(n))'
+			algorithm_space_complexity: 'O(1)'
 		}
 	]
 ]);
