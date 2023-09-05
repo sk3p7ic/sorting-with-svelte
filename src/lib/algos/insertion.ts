@@ -1,4 +1,11 @@
-import { BarColor, bar_array, bar_colors, display_config } from '../stores';
+import {
+	AvailableAlgorithm,
+	BarColor,
+	bar_array,
+	bar_colors,
+	display_config,
+	incr_num_comparisons
+} from '../stores';
 import { sleep, swap } from './utils';
 
 let arr: number[];
@@ -16,6 +23,7 @@ export default async function insertionSort() {
 			return value;
 		});
 		while (j >= 0 && arr[j] > key) {
+			incr_num_comparisons(AvailableAlgorithm.INSERTION_SORT);
 			bar_colors.update((value) => {
 				value[j] = BarColor.WHITE;
 				return value;

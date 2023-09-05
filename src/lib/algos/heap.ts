@@ -1,4 +1,11 @@
-import { BarColor, bar_array, bar_colors, display_config } from '$lib/stores';
+import {
+	AvailableAlgorithm,
+	BarColor,
+	bar_array,
+	bar_colors,
+	display_config,
+	incr_num_comparisons
+} from '$lib/stores';
 import { sleep, swap } from './utils';
 
 let arr: number[];
@@ -33,12 +40,15 @@ async function heapify(arr: number[], n: number, i: number) {
 		return value;
 	});
 	if (l < n && arr[l] > arr[largest]) {
+		incr_num_comparisons(AvailableAlgorithm.HEAP_SORT);
 		largest = l;
 	}
 	if (r < n && arr[r] > arr[largest]) {
+		incr_num_comparisons(AvailableAlgorithm.HEAP_SORT);
 		largest = r;
 	}
 	if (largest != i) {
+		incr_num_comparisons(AvailableAlgorithm.HEAP_SORT);
 		await swap(arr, i, largest, 25);
 		await heapify(arr, n, largest);
 	}

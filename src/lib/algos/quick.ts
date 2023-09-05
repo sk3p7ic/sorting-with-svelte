@@ -1,4 +1,11 @@
-import { BarColor, bar_array, bar_colors, display_config } from '../stores';
+import {
+	AvailableAlgorithm,
+	BarColor,
+	bar_array,
+	bar_colors,
+	display_config,
+	incr_num_comparisons
+} from '../stores';
 import { sleep, swap } from './utils';
 
 let arr: number[];
@@ -35,6 +42,7 @@ async function partition(l: number, r: number) {
 			return value;
 		});
 		if (arr[j] < pivot) {
+			incr_num_comparisons(AvailableAlgorithm.QUICK_SORT);
 			i++;
 			await swap(arr, i, j, 50);
 		}

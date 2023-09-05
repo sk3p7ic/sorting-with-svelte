@@ -1,7 +1,15 @@
 <script lang="ts">
 	import SettingsModal from './SettingsModal.svelte';
 	import { get } from 'svelte/store';
-	import { BarColor, bar_array, display_config, is_sorting } from '$lib/stores';
+	import {
+		BarColor,
+		bar_array,
+		current_algorithm,
+		display_config,
+		is_sorting,
+		reset_algorithm_stats,
+		string_to_available_algorithm
+	} from '$lib/stores';
 	import { init_bar_array } from '$lib/array';
 	import bubbleSort from '$lib/algos/bubble';
 	import insertionSort from '$lib/algos/insertion';
@@ -20,7 +28,10 @@
 		init_bar_array(window, n_bars, bar_color);
 	};
 
-	let selectedAlgorithm = 'bubble-sort';
+	let selectedAlgorithm: string;
+	current_algorithm.subscribe((v) => {
+		selectedAlgorithm = v;
+	});
 	const runAlgorithm = async (e: Event) => {
 		e.preventDefault();
 		is_sorting.set(true);
@@ -53,6 +64,7 @@
 				is_sorting.set(false);
 				break;
 		}
+		reset_algorithm_stats();
 	};
 
 	let isSorting = false;
@@ -72,7 +84,12 @@
 		<form id="bar-form" on:submit|preventDefault={generateNewArray}>
 			<span class="divider" />
 			<label for="sort-algo">Sorting Algorithm</label>
-			<select name="sort-algo" id="sort-algo" bind:value={selectedAlgorithm}>
+			<select
+				name="sort-algo"
+				id="sort-algo"
+				bind:value={selectedAlgorithm}
+				on:change={() => current_algorithm.set(string_to_available_algorithm(selectedAlgorithm))}
+			>
 				<option value="bubble-sort">Bubble Sort</option>
 				<option value="insertion-sort">Insertion Sort</option>
 				<option value="selection-sort">Selection Sort</option>

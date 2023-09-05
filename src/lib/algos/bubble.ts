@@ -1,4 +1,11 @@
-import { BarColor, bar_array, bar_colors, display_config } from '../stores';
+import {
+	AvailableAlgorithm,
+	BarColor,
+	bar_array,
+	bar_colors,
+	display_config,
+	incr_num_comparisons
+} from '../stores';
 import { sleep, swap } from './utils';
 
 let arr: number[];
@@ -15,6 +22,7 @@ export default async function bubbleSort() {
 				return value;
 			});
 			if (arr[j] > arr[j + 1]) {
+				incr_num_comparisons(AvailableAlgorithm.BUBBLE_SORT);
 				await swap(arr, j, j + 1, 25);
 			}
 			bar_array.set(arr);

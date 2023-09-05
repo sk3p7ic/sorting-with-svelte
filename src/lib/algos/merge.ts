@@ -1,4 +1,11 @@
-import { BarColor, bar_array, bar_colors, display_config } from '../stores';
+import {
+	AvailableAlgorithm,
+	BarColor,
+	bar_array,
+	bar_colors,
+	display_config,
+	incr_num_comparisons
+} from '../stores';
 import { sleep } from './utils';
 
 let arr: number[];
@@ -53,6 +60,7 @@ async function merge(l: number, m: number, r: number) {
 		});
 		await sleep(25);
 		if (L[i] <= R[j]) {
+			incr_num_comparisons(AvailableAlgorithm.MERGE_SORT);
 			arr[k] = L[i];
 			i++;
 		} else {

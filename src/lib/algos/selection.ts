@@ -1,4 +1,11 @@
-import { BarColor, bar_array, bar_colors, display_config } from '../stores';
+import {
+	AvailableAlgorithm,
+	BarColor,
+	bar_array,
+	bar_colors,
+	display_config,
+	incr_num_comparisons
+} from '../stores';
 import { sleep, swap } from './utils';
 
 let arr: number[];
@@ -17,6 +24,7 @@ export default async function selectionSort() {
 			});
 			await sleep(5);
 			if (arr[j] < arr[min_idx]) {
+				incr_num_comparisons(AvailableAlgorithm.SELECTION_SORT);
 				min_idx = j;
 			}
 			bar_array.set(arr);
