@@ -91,4 +91,17 @@
 		gap: 0.25rem 1rem;
 		border: 1px solid var(--white);
 	}
+
+	@media (max-width: 768px) {
+		#stat-display {
+			top: 50%;
+			padding: 0.5rem;
+			grid-template-columns: 1fr;
+			grid-template-rows: auto;
+			gap: 0.25rem 0rem;
+			transform: translateY(-50%);
+			font-size: 0.75rem;
+			opacity: 0.95;
+		}
+	}
 </style>

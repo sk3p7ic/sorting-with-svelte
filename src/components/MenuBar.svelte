@@ -99,11 +99,11 @@
 			</select>
 			<button on:click={runAlgorithm} disabled={isSorting}>Run</button>
 			<span class="divider" />
-			<button type="submit" disabled={isSorting}>Generate New Array</button>
+			<button type="submit" disabled={isSorting}>New Array</button>
 			<span class="divider" />
 		</form>
 	</div>
-	<button on:click={toggleSettingsModal}>Settings</button>
+	<button class="btn" on:click={toggleSettingsModal}>Settings</button>
 	<SettingsModal showSettingsDialog={showSettings} callback={toggleSettingsModal} />
 </div>
 
@@ -190,7 +190,7 @@
 		color: var(--foreground);
 	}
 
-	button {
+	.btn {
 		padding: 0.25rem 1rem;
 		border: none;
 		border-radius: 0.5rem;
@@ -203,18 +203,13 @@
 		transition-duration: 0.2s;
 	}
 
-	button:hover,
-	button:active {
+	.btn:hover,
+	.btn:active {
 		background-color: var(--white);
 		color: var(--black);
 	}
 
-	@media (max-width: 768px) {
-		#menu-bar {
-			flex-direction: column;
-			justify-content: center;
-		}
-
+	@media (max-width: 960px) {
 		#title-and-buttons {
 			width: 100%;
 			padding-bottom: 0.5rem;
@@ -232,6 +227,10 @@
 		}
 
 		#bar-form > span.divider {
+			display: none;
+		}
+
+		.btn {
 			display: none;
 		}
 	}
