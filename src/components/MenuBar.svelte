@@ -35,6 +35,7 @@
 	const runAlgorithm = async (e: Event) => {
 		e.preventDefault();
 		is_sorting.set(true);
+		reset_algorithm_stats();
 		if (get(bar_array).length === 0) {
 			generateNewArray();
 		}
@@ -64,7 +65,6 @@
 				is_sorting.set(false);
 				break;
 		}
-		reset_algorithm_stats();
 	};
 
 	let isSorting = false;

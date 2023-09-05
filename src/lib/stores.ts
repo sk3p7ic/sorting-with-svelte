@@ -106,7 +106,14 @@ export const algorithm_stats =
 export const current_algorithm = writable<AvailableAlgorithm>(AvailableAlgorithm.BUBBLE_SORT);
 
 export function reset_algorithm_stats() {
-	algorithm_stats.set(default_algorithm_stats);
+	//algorithm_stats.set(new Map());
+	//algorithm_stats.set(default_algorithm_stats);
+	algorithm_stats.update((value) => {
+		for (const [k, v] of default_algorithm_stats) {
+			value.set(k, { ...v, current_number_of_comparisons: 0, current_number_of_swaps: 0 });
+		}
+		return value;
+	});
 }
 
 export function string_to_available_algorithm(algorithm_name: string): AvailableAlgorithm {
